@@ -1,36 +1,71 @@
 import './App.css';
 import React from "react";
-import API from "../utils/API";
+import API from "./utils/API";
+import SearchForm from "./components/SearchForm";
+import ResultList from "./components/ResultList";
 
 class App extends React.Component {
   state = {
     search: "",
-    employeeList: []
+    employeeList: [],
+    filteredEmployees: []
   };
 
   componentDidMount() {
     this.searchRandomUser();
   };
 
-  searchRandomUser = query => {
-    API.search(query)
-      .then(res => this.setState({ results: res.data.data }))
+  searchRandomUser = () => {
+    API.search()
+      .then(res => {
+        console.log(res);
+        this.setState({ employeeList: res.data.results })
+      })
       .catch(err => console.log(err));
   };
 
   handleInputChange = event => {
-    const name = event.target.name;
-    const value = event.target.value;
+    const value = event.target.value.trim();
     this.setState({
-      [name]: value
+      search: value
+    });
+  };
+
+  handleFormSubmit = event => {
+    event.preventDefault();
+    const filteredEmployees = this.state.employeeList.filter((employee) => {
+      return employee.name.first.includes(this.state.search);
+    });
+    this.setState({
+      filteredEmployees: filteredEmployees
     });
   };
 
   render() {
-    return (
-      <div className="App" >
+    let toDisplay;
 
-      </div>
+    if (this.state.filteredEmployees) {
+      toDisplay = this.state.filteredEmployees;
+    } else {
+      toDisplay = this.state.employeeList;
+    }
+
+    return (
+      <>
+        <div className="App" >
+          <SearchForm
+            search={this.state.search}
+            handleFormSubmit={this.handleFormSubmit}
+            handleInputChange={this.handleInputChange}
+          />
+        </div>
+
+        {/* <ResultList results={this.state.employeeList} */}
+        {/* <ResultList results={this.state.filteredEmployees} */}
+        <div>
+          <ResultList results={toDisplay} />
+        </div>
+      </>
     );
   };
 };

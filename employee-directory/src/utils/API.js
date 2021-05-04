@@ -9,10 +9,10 @@ const BASEURL = "https://randomuser.me/api/?results=25";
 //     }
 // };
 
-const API = () => {
-    function search() {
+const API = {
+    search: function () {
         return axios.get(BASEURL);
-    };
+    }
 };
 
 export default API;
