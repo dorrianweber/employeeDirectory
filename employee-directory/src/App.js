@@ -12,14 +12,17 @@ class App extends React.Component {
   };
 
   componentDidMount() {
-    this.searchRandomUser();
+    this.searchUser();
   };
 
-  searchRandomUser = () => {
+  searchUser = () => {
     API.search()
       .then(res => {
         console.log(res);
-        this.setState({ employeeList: res.data.results })
+        this.setState({
+          employeeList: res.data.results,
+          filteredEmployees: res.data.results
+        });
       })
       .catch(err => console.log(err));
   };
@@ -34,7 +37,7 @@ class App extends React.Component {
   handleFormSubmit = event => {
     event.preventDefault();
     const filteredEmployees = this.state.employeeList.filter((employee) => {
-      return employee.name.first.includes(this.state.search);
+      return employee.name.last.includes(this.state.search);
     });
     this.setState({
       filteredEmployees: filteredEmployees
@@ -60,8 +63,6 @@ class App extends React.Component {
           />
         </div>
 
-        {/* <ResultList results={this.state.employeeList} */}
-        {/* <ResultList results={this.state.filteredEmployees} */}
         <div>
           <ResultList results={toDisplay} />
         </div>
