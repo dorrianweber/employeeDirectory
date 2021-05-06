@@ -11,21 +11,22 @@
 5. [Questions](#questions)
 
 ## The Assignment
-Modify existing budget tracking application so that it functions offline. When the user reconnects to the network after adding transactions offline, their data should populate correctly in the chart.
+Create a React app that allows the user to filter & sort a list of employees.
 
 ## Demonstration
 
-<img src="./images/screenshot.png" alt="screenshot of application">
+<img src="./images/screenshot1.png" alt="screenshot of application">
+<img src="./images/screenshot2.png" alt="demonstration of application's filtering feature">
 
 ## Usage
 
 Simply follow this link to use the application.
 
-https://frozen-brook-44709.herokuapp.com/
+https://dorrianweber.github.io/employeeDirectory/
 
 ## Credits
 
-I was helped in this assignment by my TA Ryan Skog in our tutoring session.
+I was helped in this assignment by my TA Ryan Skog in our tutoring session, and by TA Zac Warner & instructor Alex Kaufmann during a homework help session.
 
 ## Questions
 
