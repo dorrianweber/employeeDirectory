@@ -14,9 +14,18 @@ function SearchForm(props) {
                     placeholder="Search for an employee by last name"
                     id="search"
                 />
-                <button onClick={props.handleFormSubmit} className="btn btn-primary mt-3">
+                <button onClick={props.handleFormSubmit} className="btn btn-success mt-3">
                     Search
-        </button>
+                </button> <br />
+                <button onClick={props.handleSortSurname} className="btn btn-warning mt-3">
+                    Sort alphabetically by last name
+                </button> <br />
+                <button onClick={props.handleFilterMale} className="btn btn-primary mt-3">
+                    Kings only
+                </button>
+                <button onClick={props.handleFilterFemale} className="btn btn-danger mt-3">
+                    Queens only
+                </button>
             </div>
         </form>
     );

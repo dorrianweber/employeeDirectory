@@ -8,7 +8,10 @@ class App extends React.Component {
   state = {
     search: "",
     employeeList: [],
-    filteredEmployees: []
+    filteredEmployees: [],
+    sortedSurname: [],
+    maleEmployees: [],
+    femaleEmployees: []
   };
 
   componentDidMount() {
@@ -44,6 +47,43 @@ class App extends React.Component {
     });
   };
 
+  handleSortSurname = event => {
+    event.preventDefault();
+    console.log(this.state.employeeList);
+    const sortedSurname = this.state.employeeList.sort((a, b) => {
+      if (a.name.last > b.name.last) {
+        return 1;
+      } else if (b.name.last > a.name.last) {
+        return -1;
+      } else {
+        return 0;
+      }
+    });
+    this.setState({
+      sortedSurname: sortedSurname
+    });
+  };
+
+  handleFilterMale = event => {
+    event.preventDefault();
+    const maleEmployees = this.state.employeeList.filter((employee) => {
+      return employee.gender === "male";
+    });
+    this.setState({
+      filteredEmployees: maleEmployees
+    });
+  };
+
+  handleFilterFemale = event => {
+    event.preventDefault();
+    const femaleEmployees = this.state.employeeList.filter((employee) => {
+      return employee.gender === "female";
+    });
+    this.setState({
+      filteredEmployees: femaleEmployees
+    });
+  };
+
   render() {
     let toDisplay;
 
@@ -60,6 +100,9 @@ class App extends React.Component {
             search={this.state.search}
             handleFormSubmit={this.handleFormSubmit}
             handleInputChange={this.handleInputChange}
+            handleSortSurname={this.handleSortSurname}
+            handleFilterMale={this.handleFilterMale}
+            handleFilterFemale={this.handleFilterFemale}
           />
         </div>
 
